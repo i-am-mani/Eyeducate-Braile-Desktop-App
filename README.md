@@ -101,8 +101,10 @@ ___
 #### By Team Eyeducate,
 * Sanath D'souza
 * Kanad Gaikwad
+* Lalit Chandora
 * Mandeep Choutapelly
 * Yash Lokhande
+#### Under The Esteemed Guidence of Mrs. Smrutika Baraparte
 
 ___
 
