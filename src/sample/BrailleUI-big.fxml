@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            onKeyPressed="#activateVoiceTranslation" onKeyReleased="#deactivateVoiceTranslation" prefHeight="1013.0"
+            prefWidth="1216.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BrailleController">
+    <children>
+        <Button fx:id="minimizeBtn" layoutX="931.0" layoutY="37.0" mnemonicParsing="false" onAction="#appMini"
+                prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: f5eca7;" text="..." textFill="#686235">
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Minimize"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="closeBtn" layoutX="984.0" layoutY="37.0" mnemonicParsing="false" onAction="#appClose"
+                prefHeight="35.0" prefWidth="36.0" style="-fx-background-color: #f5eca7;" text="X" textFill="#615e20">
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Close Application">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnPdfToBraille" layoutX="14.0" layoutY="126.0" mnemonicParsing="false"
+                onAction="#changeSceneToPdf" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="110.0" prefWidth="111.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Pdf To Braille" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Pdf to Braille Mode"
+                         wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnTextToBraille" layoutX="14.0" layoutY="249.0" mnemonicParsing="false"
+                onAction="#changeSceneToText" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="110.0" prefWidth="111.0"
+                style="-fx-background-radius: 100; -fx-border-color: #8DE727; -fx-border-width: 3; -fx-border-radius: 100; -fx-background-color: #fcf9e2;"
+                text="Text To  Braille" textAlignment="CENTER" textFill="#979009" wrapText="true">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Text to Braille Mode"
+                         wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnCustom" layoutX="869.0" layoutY="29.0" mnemonicParsing="false"
+                onAction="#changeSceneToCustomize" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="50.0" prefWidth="1.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Custom" textAlignment="CENTER" textFill="#7e802c" wrapText="true">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Button>
+        <Circle fx:id="darkModeCircle" fill="DODGERBLUE" layoutX="272.0" layoutY="55.0"
+                onMouseClicked="#changeThemeDarcula" radius="18.0" stroke="#222020" strokeType="INSIDE"
+                style="-fx-fill: #282a36;"/>
+        <Circle fx:id="lightModeCircle" fill="DODGERBLUE" layoutX="216.0" layoutY="57.0"
+                onMouseClicked="#changeThemeLight" radius="18.0" stroke="#d7d12f" strokeType="INSIDE"
+                style="-fx-fill: #d7d12f;"/>
+        <Button fx:id="btnLearningMode" layoutX="1071.0" layoutY="119.0" mnemonicParsing="false"
+                onAction="#changeSceneToLearningMode" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="117.0" prefWidth="117.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Learning mode" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Learning Mode">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <AnchorPane fx:id="anchCommandPromt" layoutX="147.0" layoutY="798.0" prefHeight="210.0" prefWidth="900.0">
+            <children>
+                <TextArea fx:id="commandPromtPreview" editable="false" layoutX="3.0" layoutY="22.0"
+                          onKeyPressed="#brailleKeyboardPressed" onKeyReleased="#brailleKeyboardReleased"
+                          prefHeight="133.0" prefWidth="897.0"
+                          style="-fx-control-inner-background: #faf7e1; -fx-border-color: #F2BC12; -fx-border-width: 8;"
+                          wrapText="true">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </TextArea>
+                <CheckBox fx:id="keyboardChbx" layoutX="709.0" layoutY="165.0" mnemonicParsing="false"
+                          onAction="#keyboardChooser" prefHeight="31.0" prefWidth="177.0" selected="true"
+                          style="-fx-color: #faf7e1;" text="Use Braille Keyboard" textFill="#a48d08"/>
+            </children>
+        </AnchorPane>
+        <Button fx:id="btnDictionaryToBraille" layoutX="1071.0" layoutY="246.0" mnemonicParsing="false"
+                onAction="#changeSceneToDictionary" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="117.0" prefWidth="117.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Dictionary" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Dictoinary" wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnWikipediaToBraille" layoutX="14.0" layoutY="371.0" mnemonicParsing="false"
+                onAction="#changeSceneToWikipedia" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="110.0" prefWidth="111.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Wikipedia" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Wikipedia" wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnNewsToBraille" layoutX="1071.0" layoutY="371.0" mnemonicParsing="false"
+                onAction="#changeSceneToNews" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="117.0" prefWidth="117.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="News" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Learning Mode">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Circle fx:id="circleConfirmSpeech" fill="DODGERBLUE" layoutX="1082.0" layoutY="780.0" radius="18.0"
+                stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #7687bc;"/>
+        <AnchorPane layoutX="148.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="717.0" prefWidth="897.0" style="-fx-background-color: #4f618c;">
+            <children>
+                <AnchorPane fx:id="anchQuiz" layoutX="10.0" layoutY="10.0" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB;" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label fx:id="tQuizMode" layoutX="326.0" layoutY="14.0" text="Quiz Mode">
+                            <font>
+                                <Font size="31.0"/>
+                            </font>
+                        </Label>
+                        <TextArea fx:id="quizTextArea" editable="false" layoutX="84.0" layoutY="192.0"
+                                  prefHeight="200.0" prefWidth="753.0" style="-fx-control-inner-background: #faf7e1;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </TextArea>
+                        <TextField fx:id="quizAnswerField" layoutX="87.0" layoutY="500.0" prefHeight="59.0"
+                                   prefWidth="372.0" promptText="Enter Answer" style="-fx-background-color: #faf7e1;">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </TextField>
+                        <Button fx:id="btnNextQuiz" layoutX="485.0" layoutY="647.0" mnemonicParsing="false"
+                                onAction="#nextQuiz" prefHeight="50.0" prefWidth="87.0" text="Next"/>
+                        <Button fx:id="btnSubmitQuiz" layoutX="502.0" layoutY="505.0" mnemonicParsing="false"
+                                onAction="#submitQuiz" prefHeight="50.0" prefWidth="87.0" text="Submit"/>
+                        <Label fx:id="tProblemStatement" layoutX="87.0" layoutY="114.0" text="Problem Statement">
+                            <font>
+                                <Font size="31.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tAnswer" layoutX="87.0" layoutY="446.0" prefHeight="46.0" prefWidth="162.0"
+                               text="Answer :-">
+                            <font>
+                                <Font size="31.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnPrevQuiz" layoutX="326.0" layoutY="647.0" mnemonicParsing="false"
+                                onAction="#prevQuiz" prefHeight="50.0" prefWidth="87.0" text="Previous"/>
+                        <Label fx:id="tCorrection" layoutX="631.0" layoutY="507.0" prefHeight="46.0" prefWidth="162.0"
+                               text="...">
+                            <font>
+                                <Font size="31.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tQuetionNumber" layoutX="14.0" layoutY="203.0" text="Q.)">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnResetQuiz" layoutX="49.0" layoutY="637.0" mnemonicParsing="false"
+                                onAction="#resetQuestionsQuiz" prefHeight="50.0" prefWidth="87.0" text="reset"/>
+                        <Line fx:id="qLine1" endX="646.0" layoutX="187.0" layoutY="96.0" startX="-100.0"/>
+                        <Line fx:id="qLine2" endX="646.0" layoutX="187.0" layoutY="170.0" startX="-100.0"/>
+                        <Line fx:id="qLine3" endX="715.0" layoutX="153.0" layoutY="422.0" startX="-100.0"/>
+                        <Line fx:id="qLine4" endX="715.0" layoutX="148.0" layoutY="586.0" startX="-100.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchDictonary" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB;" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label fx:id="tDictionaryTitle" layoutX="304.0" layoutY="14.0" prefHeight="70.0"
+                               prefWidth="283.0" text="Dictionary" textFill="#c68729">
+                            <font>
+                                <Font size="48.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tSearch" layoutX="87.0" layoutY="84.0" prefHeight="57.0" prefWidth="133.0"
+                               text="Search" textFill="#717a3d">
+                            <font>
+                                <Font size="26.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="searchWordField" layoutX="181.0" layoutY="97.0" onAction="#searchDefinition"
+                                   prefHeight="35.0" prefWidth="312.0" promptText="Enter word"
+                                   style="-fx-background-color: #faf7e1;"/>
+                        <Button fx:id="btnSearchWord" layoutX="526.0" layoutY="99.0" mnemonicParsing="false"
+                                onAction="#searchDefinition" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Go!"/>
+                        <TextArea fx:id="definitionTextArea" layoutX="32.0" layoutY="229.0" prefHeight="406.0"
+                                  prefWidth="481.0"
+                                  style="-fx-control-inner-background: #faf7e1; -fx-text-fill: #7b7c0e;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </TextArea>
+                        <Button fx:id="btnReadDefinition" layoutX="176.0" layoutY="672.0" mnemonicParsing="false"
+                                onMouseEntered="#dropShadowEffectOn" onMouseExited="#dropShadowEffectOff" text="Read"/>
+                        <Button fx:id="btnUploadDefinitionToBraille" layoutX="543.0" layoutY="672.0"
+                                mnemonicParsing="false" onAction="#uploadDictionaryToBraille"
+                                onMouseEntered="#dropShadowEffectOn" onMouseExited="#dropShadowEffectOff"
+                                text="Upload"/>
+                        <TextArea fx:id="synonymsTextArea" layoutX="543.0" layoutY="230.0" prefHeight="159.0"
+                                  prefWidth="331.0"
+                                  style="-fx-control-inner-background: #faf7e1; -fx-text-fill: #62d25e;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </TextArea>
+                        <TextArea fx:id="antonymsTextArea" layoutX="543.0" layoutY="448.0" prefHeight="186.0"
+                                  prefWidth="320.0"
+                                  style="-fx-control-inner-background: #faf7e1; -fx-text-fill: #62d25e;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </TextArea>
+                        <Label fx:id="tDefination" layoutX="192.0" layoutY="173.0" prefHeight="57.0" prefWidth="133.0"
+                               text="Definition" textFill="#717a3d">
+                            <font>
+                                <Font size="26.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tSynonyms" layoutX="642.0" layoutY="173.0" prefHeight="57.0" prefWidth="133.0"
+                               text="Synonyms" textFill="#717a3d">
+                            <font>
+                                <Font size="26.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tAntonyms" layoutX="642.0" layoutY="389.0" prefHeight="57.0" prefWidth="133.0"
+                               text="Antonyms" textFill="#717a3d">
+                            <font>
+                                <Font size="26.0"/>
+                            </font>
+                        </Label>
+                        <Line fx:id="line2" endX="608.0" layoutX="267.0" layoutY="156.0" startX="-233.0"
+                              stroke="#c9d080"/>
+                        <Line fx:id="line3" endX="-100.0" endY="445.0" layoutX="629.0" layoutY="204.0" startX="-100.0"
+                              startY="-33.0" stroke="#c9d090"/>
+                        <Line fx:id="line1" endX="608.0" layoutX="267.0" layoutY="84.0" startX="-233.0"
+                              stroke="#c9d080"/>
+                        <Button fx:id="btnStopReadingDictionary" layoutX="259.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#stopTextToAudioByArgv" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Stop" textFill="#645e5e"/>
+                        <Button fx:id="btnSpellcheck" layoutX="587.0" layoutY="99.0" mnemonicParsing="false"
+                                onAction="#searchSpelling" text="Spell Check"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchOcr" prefHeight="717.0" prefWidth="897.0" style="-fx-background-color: #F2EECB;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TextField fx:id="imageSourceField" layoutX="169.0" layoutY="70.0" prefHeight="43.0"
+                                   prefWidth="305.0" promptText="Enter path to the image file"
+                                   style="-fx-background-color: #faf7e1;"/>
+                        <Label fx:id="tImageSource" layoutX="14.0" layoutY="74.0" prefHeight="35.0" prefWidth="162.0"
+                               text="Image Source">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnSourceImage" layoutX="492.0" layoutY="76.0" mnemonicParsing="false"
+                                onAction="#selectImageFile" text="Select Image file"/>
+                        <TextArea fx:id="ocrTextArea" editable="false" layoutX="31.0" layoutY="201.0" prefHeight="406.0"
+                                  prefWidth="481.0" style="-fx-control-inner-background: #faf7e1;" wrapText="true">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </TextArea>
+                        <Button fx:id="btnOcrUpload" layoutX="296.0" layoutY="628.0" mnemonicParsing="false"
+                                text="Upload"/>
+                        <Button fx:id="btnOcrRead" layoutX="142.0" layoutY="628.0" mnemonicParsing="false"
+                                prefHeight="31.0" prefWidth="69.0" text="Read"/>
+                        <ImageView fx:id="sourceImageView" fitHeight="516.0" fitWidth="355.0" layoutX="532.0"
+                                   layoutY="199.0" pickOnBounds="true" preserveRatio="true"
+                                   style="-fx-image: url(file:E:\eurotext.bmp);"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                            minWidth="-Infinity" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB; -fx-border-color: #F2BC12; -fx-border-radius: 3;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="btnOutputfile" layoutX="23.0" layoutY="14.0" mnemonicParsing="false"
+                                onAction="#outputFileChooser" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" style="-fx-background-color: #DECF5F;"
+                                text="Output File" textFill="#6f6b07"/>
+                        <TextArea fx:id="writtenTextArea" layoutX="14.0" layoutY="110.0"
+                                  onKeyReleased="#writtenTextAreaExit" onKeyTyped="#displayBraille" prefHeight="533.0"
+                                  prefWidth="407.0" promptText="Enter Text Here"
+                                  style="-fx-control-inner-background: #faf7e1;">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Enter text here, to convert it to braille">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </TextArea>
+                        <TextArea fx:id="brailleTextArea" editable="false" layoutX="466.0" layoutY="110.0"
+                                  onKeyPressed="#brailleAreaKeyboardPressed"
+                                  onKeyReleased="#brailleAreaKeyboardReleased" prefHeight="533.0" prefWidth="400.0"
+                                  promptText="Braille Conversion" style="-fx-control-inner-background: #faf7e1;">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Enter braille here, using braille keyboard layout ( using S,D,F &amp; J,K,L) and convert braille to text">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </TextArea>
+                        <Button fx:id="btnSave" layoutX="38.0" layoutY="657.0" mnemonicParsing="false"
+                                onAction="#saveBraille" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="86.0"
+                                style="-fx-background-color: #decf5f; -fx-border-radius: 10; -fx-background-radius: 10;"
+                                text="save" textFill="#837f0d"/>
+                        <Text fx:id="outputTextField" fill="#afb20c" fontSmoothingType="LCD" layoutX="124.0"
+                              layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address of output FIle"
+                              wrappingWidth="391.00000024586916">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Text>
+                        <Button fx:id="btnUploadTxtToBraille" layoutX="540.0" layoutY="657.0" mnemonicParsing="false"
+                                onAction="#uploadTxtToBraille" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="86.0"
+                                style="-fx-background-color: #decf5f; -fx-border-radius: 10; -fx-background-radius: 10;"
+                                text="Upload " textFill="#837f0d"/>
+                        <TextField fx:id="txtToBrailleDelayField" alignment="CENTER" layoutX="637.0" layoutY="657.0"
+                                   onAction="#uploadTextToBrailleByEnter" onKeyPressed="#uploadTextToBrailleByEnter"
+                                   prefHeight="31.0" prefWidth="94.0" promptText="Delay "
+                                   style="-fx-background-color: #faf7e1;"/>
+                        <Button layoutX="743.0" layoutY="657.0" mnemonicParsing="false" onAction="#restartStepper"
+                                prefHeight="31.0" prefWidth="36.0"
+                                style="-fx-background-color: #7c3b3b; -fx-border-radius: 100; -fx-background-radius: 100;"
+                                textFill="#7c3b3b"/>
+                        <Line fx:id="vertLineTextToBraille" endX="-100.0" endY="642.0" layoutX="541.0" layoutY="37.0"
+                              startX="-100.0" stroke="#c9c935"/>
+                        <Label fx:id="textLabelTextToBraille" layoutX="74.0" layoutY="61.0" prefHeight="31.0"
+                               prefWidth="100.0" text="Text" textFill="#a8ab57">
+                            <font>
+                                <Font size="27.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="BrailleLabelTextToBraille" layoutX="526.0" layoutY="61.0" prefHeight="31.0"
+                               prefWidth="100.0" text="Braille" textFill="#a8ab57">
+                            <font>
+                                <Font size="27.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchWikipedia" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB;" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label fx:id="tWikipediaTitle" layoutX="296.0" layoutY="23.0" prefHeight="57.0"
+                               prefWidth="177.0" text="Wikipedia" textFill="#717a3d">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tSearchWikipedia" layoutX="45.0" layoutY="96.0" prefHeight="57.0"
+                               prefWidth="197.0" text="Search Wikipedia" textFill="#717a3d">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="searchWikipediaField" layoutX="249.0" layoutY="107.0"
+                                   onAction="#searchWikipedia" prefHeight="35.0" prefWidth="400.0" promptText="Enter "
+                                   style="-fx-background-color: #faf7e1;"/>
+                        <TextArea fx:id="wikipediaTextArea" layoutX="45.0" layoutY="202.0" prefHeight="491.0"
+                                  prefWidth="615.0"
+                                  style="-fx-control-inner-background: #faf7e1; -fx-text-fill: #7b7c0e;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </TextArea>
+                        <Line fx:id="wLine1" endX="418.0" endY="-32.999969482421875" layoutX="389.0" layoutY="125.0"
+                              startX="-342.0" startY="-32.999969482421875" stroke="#c9d090"/>
+                        <Line fx:id="wLine2" endX="488.0" endY="-32.999969482421875" layoutX="320.0" layoutY="197.0"
+                              startX="-274.0" startY="-32.99998474121094" stroke="#c9d090"/>
+                        <Button fx:id="btnSearchWikipedia" layoutX="678.0" layoutY="109.0" mnemonicParsing="false"
+                                onAction="#searchWikipedia" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Go!"/>
+                        <Button fx:id="btnReadWikipedia" layoutX="688.0" layoutY="321.0" mnemonicParsing="false"
+                                onAction="#readWikipedia" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="62.0" text="Read"/>
+                        <Button fx:id="btnUploadWikipedia" layoutX="685.0" layoutY="417.0" mnemonicParsing="false"
+                                onAction="#uploadWikipediaToBraille" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Upload"/>
+                        <Line fx:id="wLine3" endX="-77.0" endY="-33.0" layoutX="946.0" layoutY="416.0" startX="-274.0"
+                              startY="-32.99998474121094" stroke="#c9d090"/>
+                        <Button fx:id="btnStopReadingWikipedia" layoutX="800.0" layoutY="321.0" mnemonicParsing="false"
+                                onAction="#stopTextToAudioByArgv" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="62.0" text="Stop"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchCustomize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                            minWidth="-Infinity" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB; -fx-border-color: #F2BC12; -fx-border-width: 3;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ColorPicker fx:id="previewColor" layoutX="382.0" layoutY="253.0"/>
+                        <ColorPicker fx:id="buttonColor" layoutX="382.0" layoutY="346.0"/>
+                        <ColorPicker fx:id="backgroundColor" layoutX="382.0" layoutY="411.0"/>
+                        <Label fx:id="tPreview" layoutX="231.0" layoutY="251.0" prefHeight="35.0" prefWidth="127.0"
+                               text="Preview">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tBackground" layoutX="231.0" layoutY="409.0" text="Background">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tButton" layoutX="234.0" layoutY="351.0" prefHeight="35.0" prefWidth="127.0"
+                               text="Buttons">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tCustomize" layoutX="318.0" layoutY="31.0" prefHeight="43.0" prefWidth="197.0"
+                               text="Customization">
+                            <font>
+                                <Font size="25.0"/>
+                            </font>
+                        </Label>
+                        <ColorPicker fx:id="textColor" layoutX="382.0" layoutY="470.0"/>
+                        <Label fx:id="tText" layoutX="231.0" layoutY="477.0" prefHeight="35.0" prefWidth="87.0"
+                               text="Text">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tColorScheme" layoutX="234.0" layoutY="175.0" prefHeight="43.0" prefWidth="297.0"
+                               text="Choose Color Sceme">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="applyCustomizeColor" layoutX="406.0" layoutY="536.0" mnemonicParsing="false"
+                                onAction="#applyColorScheme" prefHeight="31.0" prefWidth="79.0" text="Apply"/>
+                        <ColorPicker fx:id="borderColor" layoutX="381.0" layoutY="298.0"/>
+                        <Label fx:id="tBorder" layoutX="233.0" layoutY="303.0" prefHeight="35.0" prefWidth="127.0"
+                               text="Border">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="serialPortChoice" layoutX="612.0" layoutY="253.0"
+                                   onMouseClicked="#showSerialAvailable" prefWidth="150.0"/>
+                        <Label fx:id="tSerialMode" layoutX="612.0" layoutY="179.0" prefHeight="35.0" prefWidth="162.0"
+                               text="Serial Port">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnSetSerial" layoutX="786.0" layoutY="253.0" mnemonicParsing="false"
+                                onAction="#selectSerialPort" text="Set"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchNews" prefHeight="717.0" prefWidth="897.0" style="-fx-background-color: #F2EECB;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ListView fx:id="listView" editable="true" layoutX="23.0" layoutY="97.0" prefHeight="563.0"
+                                  prefWidth="230.0" style="-fx-background-color: #faf7e1;"/>
+                        <TextArea fx:id="articleTextArea" editable="false" layoutX="265.0" layoutY="97.0"
+                                  prefHeight="563.0" prefWidth="607.0" style="-fx-control-inner-background: #faf7e1;"
+                                  wrapText="true">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </TextArea>
+                        <Button fx:id="btnNextNews" layoutX="201.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#populateListViewNextPage" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Next"/>
+                        <Button fx:id="btnPrevNews" layoutX="23.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#populateListViewPrevPage" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Previous"/>
+                        <Label fx:id="tNewsTitle" layoutX="376.0" layoutY="14.0" text="News">
+                            <font>
+                                <Font size="41.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnReadArticle" layoutX="626.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#readArticle" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="111.0"
+                                text="Read Article"/>
+                        <Button fx:id="btnReadHeadlines" layoutX="396.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#readHeadlines" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Read Headlines"/>
+                        <Button fx:id="btnStopReadingNews" layoutX="821.0" layoutY="672.0" mnemonicParsing="false"
+                                onAction="#stopNewsToAudio" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" text="Stop"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchLearningMode" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity"
+                            maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0"
+                            prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB; -fx-border-color: #F2BC12; -fx-border-radius: 3;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="btnLearningStart" layoutX="290.0" layoutY="259.0" mnemonicParsing="false"
+                                onAction="#startLearnMode" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="43.0" prefWidth="100.0" text="Start"
+                                textFill="#3074eb">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.73" text="Begin Learning mode"/>
+                            </tooltip>
+                        </Button>
+                        <Line fx:id="lHor1" endX="738.0" layoutX="137.0" layoutY="339.0" startX="-100.0"/>
+                        <Label fx:id="tLearn" layoutX="75.0" layoutY="96.0" prefHeight="97.0" prefWidth="151.0"
+                               text="Learn" textFill="#3074eb">
+                            <font>
+                                <Font size="33.0"/>
+                            </font>
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Displays Braille alphabets on eyedev with given delay" wrapText="true">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Label>
+                        <Label fx:id="tLearnInfo1" layoutX="290.0" layoutY="73.0" prefHeight="65.0" prefWidth="444.0"
+                               text="Alphabets A-Z" textFill="#3074eb">
+                            <font>
+                                <Font size="23.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="tLearnInfo2" layoutX="290.0" layoutY="138.0" prefHeight="65.0" prefWidth="444.0"
+                               text="Numbers 0-9" textFill="#3074eb">
+                            <font>
+                                <Font size="23.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="timeIntervalField" layoutX="379.0" layoutY="203.0" onAction="#startLearnMode"
+                                   opacity="0.75" promptText="Enter TIme Interval">
+                            <tooltip>
+                                <Tooltip text="Delay between each letter"/>
+                            </tooltip>
+                        </TextField>
+                        <Label fx:id="tTest" layoutX="65.0" layoutY="408.0" prefHeight="97.0" prefWidth="151.0"
+                               text="Test" textFill="#3074eb">
+                            <font>
+                                <Font size="33.0"/>
+                            </font>
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Eyedev would display any random Alphabet A-Z and Number 0-9, User can guess the output."
+                                         wrapText="true">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Label>
+                        <Label fx:id="tTestInfo" layoutX="290.0" layoutY="376.0" prefHeight="147.0" prefWidth="444.0"
+                               text="Press T or click the Test button, Try reading the Braille letter on Device and correct yourself with Voice output ."
+                               textFill="#3074eb" wrapText="true">
+                            <font>
+                                <Font size="23.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnLearningTest" layoutX="290.0" layoutY="561.0" mnemonicParsing="false"
+                                onAction="#testMode" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="43.0" prefWidth="100.0" text="Test"
+                                textFill="#3074eb">
+                            <tooltip>
+                                <Tooltip text="Randomly Display any letter on Device" wrapText="true"/>
+                            </tooltip>
+                        </Button>
+                        <Label fx:id="tDelay" layoutX="290.0" layoutY="186.0" prefHeight="65.0" prefWidth="70.0"
+                               text="Delay" textFill="#3074eb">
+                            <font>
+                                <Font size="23.0"/>
+                            </font>
+                        </Label>
+                        <Line fx:id="lVert1" endX="-100.0" endY="257.0" layoutX="316.0" layoutY="57.0" startX="-100.0"
+                              startY="-31.0"/>
+                        <Line fx:id="lVert2" endX="-100.0" endY="257.0" layoutX="316.0" layoutY="401.0" startX="-100.0"
+                              startY="-31.0"/>
+                        <Button fx:id="btnLearnGo" layoutX="636.0" layoutY="201.0" mnemonicParsing="false"
+                                onAction="#goToStepper" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="35.0" prefWidth="62.0" text="Go"
+                                textFill="#3074eb">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Go To Letter"/>
+                            </tooltip>
+                        </Button>
+                        <Label fx:id="tGoto" layoutX="636.0" layoutY="77.0" prefHeight="57.0" prefWidth="127.0"
+                               text="Go to" textFill="#3074eb">
+                            <font>
+                                <Font size="23.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="learnGoToField" layoutX="636.0" layoutY="145.0" onAction="#goToStepper"
+                                   prefHeight="31.0" prefWidth="94.0">
+                            <tooltip>
+                                <Tooltip opacity="0.75" text="Enter any letter "/>
+                            </tooltip>
+                        </TextField>
+                        <Line fx:id="lVert3" endX="-100.0" endY="257.0" layoutX="697.0" layoutY="57.0" startX="-100.0"
+                              startY="-31.0"/>
+                        <Button fx:id="btnLearningRestart" layoutX="433.0" layoutY="259.0" mnemonicParsing="false"
+                                onAction="#restartStepper" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="43.0" prefWidth="79.0" text="Restart">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Restart Device to Initial Position"/>
+                            </tooltip>
+                        </Button>
+                        <Label fx:id="testValidationLabel" layoutX="734.0" layoutY="491.0" prefHeight="141.0"
+                               prefWidth="111.0" text="..." textAlignment="CENTER" textFill="#8ada67">
+                            <font>
+                                <Font size="96.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchPdf" layoutX="100.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                            minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="897.0"
+                            style="-fx-background-color: #F2EECB; -fx-border-color: #F2BC12; -fx-border-width: 3;"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="btnPdfSource" layoutX="24.0" layoutY="28.0" mnemonicParsing="false"
+                                onAction="#srcFileChooser" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff"
+                                style="-fx-background-color: #decf5f; -fx-border-color: #;" text="Select Source file">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Select file to read or upload to device">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="btnPrint" layoutX="25.0" layoutY="657.0" mnemonicParsing="false"
+                                onAction="#savePdfToBraille" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" style="-fx-background-color: #b4a74a;" text="Save">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Save the page's Braille conversion.">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="btnNextpage" layoutX="614.0" layoutY="657.0" mnemonicParsing="false"
+                                onAction="#loadNextPage" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" style="-fx-background-color: #decf5f;"
+                                text="next page">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Turn to next page">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="btnPrevpage" layoutX="490.0" layoutY="658.0" mnemonicParsing="false"
+                                onAction="#loadPrevPage" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" style="-fx-background-color: #decf5f;"
+                                text="prev page">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Turn to previous page">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <Text fx:id="sourceText" fill="#8fb210" fontSmoothingType="LCD" layoutX="178.0" layoutY="49.0"
+                              strokeType="OUTSIDE" strokeWidth="0.0" text="Address of File"
+                              wrappingWidth="319.6708984375"/>
+                        <TextArea fx:id="braillePdfTextArea" editable="false" layoutX="43.0" layoutY="81.0"
+                                  onKeyPressed="#activateVoiceTranslation" onKeyReleased="#deactivateVoiceTranslation"
+                                  prefHeight="555.0" prefWidth="669.0"
+                                  style="-fx-control-inner-background: #faf7e1; -fx-highlight-fill: green; -fx-highlight-text-fill: black;"
+                                  wrapText="true">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Current Page ">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </TextArea>
+                        <Text fx:id="textPreview" fill="#a19942" layoutX="338.0" layoutY="73.0" strokeType="OUTSIDE"
+                              strokeWidth="0.0" text="Preview" wrappingWidth="69.99998664855957">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Text>
+                        <Button fx:id="btnPdfDestination" layoutX="533.0" layoutY="28.0" mnemonicParsing="false"
+                                onAction="#outputFileChooser" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff"
+                                style="-fx-background-color: #decf5f; -fx-border-color: #;"
+                                text="Select destination file" textFill="#030303">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Select file where output should be stored">
+                                    <font>
+                                        <Font size="114.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <TextField fx:id="rangeFrom" layoutX="743.0" layoutY="165.0" prefHeight="31.0" prefWidth="53.0"
+                                   promptText="From" style="-fx-background-color: #faf7e1;"/>
+                        <Text fx:id="tEquals" fill="#9e920e" layoutX="802.0" layoutY="186.0" strokeType="OUTSIDE"
+                              strokeWidth="0.0" text="=="/>
+                        <TextField fx:id="rangeTo" layoutX="830.0" layoutY="165.0" prefHeight="31.0" prefWidth="53.0"
+                                   promptText="To" style="-fx-background-color: #faf7e1;"/>
+                        <CheckBox fx:id="rangeCheckBox" layoutX="746.0" layoutY="123.0" mnemonicParsing="false"
+                                  prefHeight="31.0" prefWidth="133.0" style="-fx-color: #faf7e1;" text="Use Range"
+                                  textFill="#940000">
+                            <tooltip>
+                                <Tooltip opacity="0.75" text="Save or upload pages between given range">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </CheckBox>
+                        <Label fx:id="savePdfConfirmLabel" layoutX="118.0" layoutY="659.0" prefHeight="30.0"
+                               prefWidth="331.0" style="-fx-text-fill: red;">
+                            <font>
+                                <Font size="12.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="btnGoTo" layoutX="803.0" layoutY="262.0" mnemonicParsing="false"
+                                onAction="#goToPage" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="31.0" prefWidth="79.0"
+                                style="-fx-background-color: #decf5f;" text="Go To" textFill="#7c1414">
+                            <tooltip>
+                                <Tooltip opacity="0.75" text="Go to Specified page number" wrapText="true">
+                                    <font>
+                                        <Font size="1145.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <TextField fx:id="goToField" layoutX="724.0" layoutY="262.0" onKeyPressed="#goToPageByEnter"
+                                   prefHeight="31.0" prefWidth="70.0" promptText="To"
+                                   style="-fx-background-color: #faf7e1;">
+                            <tooltip>
+                                <Tooltip opacity="0.75" text="Enter page number ">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </TextField>
+                        <Button fx:id="btnRead" layoutX="746.0" layoutY="559.0" mnemonicParsing="false"
+                                onAction="#readOutLoud" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="65.0" prefWidth="70.0"
+                                style="-fx-background-color: #decf5f; -fx-background-radius: 100;" text="Read">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Enable narrator to read the page under preview.">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <CheckBox fx:id="readOnChangeChbx" layoutX="728.0" layoutY="510.0" mnemonicParsing="false"
+                                  prefHeight="31.0" prefWidth="133.0" style="-fx-color: #faf7e1;" text="Always Read"
+                                  textFill="#129a0d">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Enable narrator for every page"/>
+                            </tooltip>
+                        </CheckBox>
+                        <Button fx:id="BtnUploadPdfToBraille" layoutX="742.0" layoutY="359.0" mnemonicParsing="false"
+                                onAction="#uploadPdfToBraille" onMouseEntered="#dropShadowEffectOn"
+                                onMouseExited="#dropShadowEffectOff" prefHeight="36.0" prefWidth="87.0"
+                                style="-fx-background-color: #decf5f;" text="Upload" textFill="#0d729a">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Upload the pdf to Eyedev"
+                                         wrapText="true">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                        <TextField fx:id="pdfToBrailleDelayField" layoutX="746.0" layoutY="416.0"
+                                   onKeyPressed="#uploadPdfToBrailleByEnter" prefHeight="31.0" prefWidth="87.0"
+                                   promptText="Delay" style="-fx-background-color: #faf7e1;"/>
+                        <Button layoutX="842.0" layoutY="362.0" mnemonicParsing="false" onAction="#restartStepper"
+                                prefHeight="31.0" prefWidth="36.0"
+                                style="-fx-background-color: #c1725e; -fx-background-radius: 100;">
+                            <tooltip>
+                                <Tooltip consumeAutoHidingEvents="false" opacity="0.75"
+                                         text="Stop Eyedev or restart the device to initial position">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Tooltip>
+                            </tooltip>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <Button fx:id="btnOcrMode" layoutX="1074.0" layoutY="507.0" mnemonicParsing="false" onAction="#changeSceneToOCR"
+                onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn" prefHeight="110.0" prefWidth="111.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="OCR" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to OCR" wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+        <Button fx:id="btnQuizMode" layoutX="14.0" layoutY="493.0" mnemonicParsing="false"
+                onAction="#changeSceenToQuizMode" onMouseEntered="#enlargeBtn" onMouseExited="#minimizeBtn"
+                prefHeight="110.0" prefWidth="111.0"
+                style="-fx-background-radius: 100; -fx-border-color: #dbce6d; -fx-border-radius: 100; -fx-border-width: 3; -fx-background-color: #fcf9e2;"
+                text="Quiz" textAlignment="CENTER" textFill="#9b9e0c" wrapText="true">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <tooltip>
+                <Tooltip consumeAutoHidingEvents="false" opacity="0.75" text="Switch to Quiz Mode" wrapText="true">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Tooltip>
+            </tooltip>
+        </Button>
+    </children>
+</AnchorPane>

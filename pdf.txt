@@ -1,0 +1,52 @@
+The Morgan Kaufmann Series in Networking
+Series Editor, David Clark, M.I.T.
+Policy-Based Network Management: Solutions for the
+Computer Networks: A Systems Approach, 4e
+Next Generation
+Larry L. Peterson and Bruce S. Davie
+Network Routing: Algorithms, Protocols, and John Strassner
+Architectures Network Architecture, Analysis, and Design, 2e
+Deepankar Medhi and Karthikeyan Ramaswami James D. McCabe
+Deploying IP and MPLS QoS for Multiservice Networks: MPLS Network Management: MIBs, Tools, and
+Theory and Practice Techniques
+John Evans and Clarence Filsﬁls Thomas D. Nadeau
+Trafﬁc Engineering and QoS Optimization of Integrated Developing IP-Based Services: Solutions for Service
+Voice & Data Networks Providers and Vendors
+Gerald R. Ash Monique Morrow and Kateel Vijayananda
+IPv6 Core Protocols Implementation Telecommunications Law in the Internet Age
+Qing Li, Tatuya Jinmei, and Keiichi Shima Sharon K. Black
+Smart Phone and Next-Generation Mobile Computing Optical Networks: A Practical Perspective, 2e
+Pei Zheng and Lionel Ni Rajiv Ramaswami and Kumar N. Sivarajan
+GMPLS: Architecture and Applications Internet QoS: Architectures and Mechanisms
+Adrian Farrel and Igor Bryskin Zheng Wang
+Network Security: A Practical Approach TCP/IP Sockets in Java: Practical Guide for Programmers
+Jan L. Harrington Michael J. Donahoo and Kenneth L. Calvert
+Content Networking: Architecture, Protocols, and Practice TCP/IP Sockets in C: Practical Guide for Programmers
+Markus Hofmann and Leland R. Beaumont Kenneth L. Calvert and Michael J. Donahoo
+Network Algorithmics: An Interdisciplinary Approach to Multicast Communication: Protocols, Programming, and
+Designing Fast Networked Devices Applications
+George Varghese Ralph Wittmann and Martina Zitterbart
+MPLS: Technology and Applications
+Network Recovery: Protection and Restoration of Optical,
+SONET-SDH, IP, and MPLS Bruce Davie and Yakov Rekhter
+Jean Philippe Vasseur, Mario Pickavet, and Piet High-Performance Communication Networks, 2e
+Demeester Jean Walrand and Pravin Varaiya
+Routing, Flow, and Capacity Design in Communication Internetworking Multimedia
+and Computer Networks Jon Crowcroft, Mark Handley, and Ian Wakeman
+Michał Pióro and Deepankar Medhi Understanding Networked Applications: A First Course
+Wireless Sensor Networks: An Information Processing David G. Messerschmitt
+Approach Integrated Management of Networked Systems: Concepts,
+Feng Zhao and Leonidas Guibas Architectures, and Their Operational
+Communication Networking: An Analytical Approach Application
+Anurag Kumar, D. Manjunath, and Joy Kuri Heinz-Gerd Hegering, Sebastian Abeck, and
+The Internet and Its Protocols: A Comparative Approach Bernhard Neumair
+Adrian Farrel Virtual Private Networks: Making the Right Connection
+Modern Cable Television Technology: Video, Voice, and Dennis Fowler
+Data Communications, 2e Networked Applications: A Guide to the New Computing
+Walter Ciciora, James Farmer, David Large, and Infrastructure
+Michael Adams David G. Messerschmitt
+Bluetooth Application Programming with the Java APIs Wide Area Network Design: Concepts and Tools for
+C Bala Kumar, Paul J. Kline, and Timothy J. Optimization
+Thompson Robert S. Cahn
+For further information on these books and for a list of forthcoming titles, please visit our Web site at
+http://www.mkp.com.

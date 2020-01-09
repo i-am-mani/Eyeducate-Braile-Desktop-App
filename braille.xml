@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="braille" default="all">
+
+
+    <property file="braille.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="700m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/*.rbc/**"/>
+        <exclude name="**/*.yarb/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.war"/>
+        <include name="*.swc"/>
+        <include name="*.zip"/>
+        <include name="*.egg"/>
+        <include name="*.ane"/>
+        <include name="*.jar"/>
+        <include name="*.ear"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+    </patternset>
+
+    <!-- JDK definitions -->
+
+    <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+    <path id="jdk.classpath.1.8">
+        <fileset dir="${jdk.home.1.8}">
+            <include name="jre/lib/charsets.jar"/>
+            <include name="jre/lib/deploy.jar"/>
+            <include name="jre/lib/ext/access-bridge-64.jar"/>
+            <include name="jre/lib/ext/cldrdata.jar"/>
+            <include name="jre/lib/ext/dnsns.jar"/>
+            <include name="jre/lib/ext/jaccess.jar"/>
+            <include name="jre/lib/ext/jfxrt.jar"/>
+            <include name="jre/lib/ext/localedata.jar"/>
+            <include name="jre/lib/ext/nashorn.jar"/>
+            <include name="jre/lib/ext/sunec.jar"/>
+            <include name="jre/lib/ext/sunjce_provider.jar"/>
+            <include name="jre/lib/ext/sunmscapi.jar"/>
+            <include name="jre/lib/ext/sunpkcs11.jar"/>
+            <include name="jre/lib/ext/zipfs.jar"/>
+            <include name="jre/lib/javaws.jar"/>
+            <include name="jre/lib/jce.jar"/>
+            <include name="jre/lib/jfr.jar"/>
+            <include name="jre/lib/jfxswt.jar"/>
+            <include name="jre/lib/jsse.jar"/>
+            <include name="jre/lib/management-agent.jar"/>
+            <include name="jre/lib/plugin.jar"/>
+            <include name="jre/lib/resources.jar"/>
+            <include name="jre/lib/rt.jar"/>
+        </fileset>
+    </path>
+
+    <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+    <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+    <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+
+
+    <!-- Project Libraries -->
+
+    <path id="library.itextpdf-5.5.11.classpath">
+        <pathelement location="${basedir}/../../Downloads/itextpdf-5.5.11.jar"/>
+    </path>
+
+    <path id="library.json-20160810-javadoc.classpath"/>
+
+    <path id="library.json-20160810.classpath">
+        <pathelement location="${basedir}/../../Downloads/Programs/json-20160810.jar"/>
+    </path>
+    <!-- Register Custom Compiler Taskdefs -->
+    <property name="javac2.home" value="${idea.home}/lib"/>
+    <path id="javac2.classpath">
+        <fileset dir="${javac2.home}">
+            <include name="javac2.jar"/>
+            <include name="jdom.jar"/>
+            <include name="asm-all*.jar"/>
+            <include name="forms-*.jar"/>
+        </fileset>
+    </path>
+    <target name="register.custom.compilers">
+        <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+        <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions"
+                 classpathref="javac2.classpath"/>
+    </target>
+
+    <!-- Modules -->
+
+
+    <!-- Module Braille -->
+
+    <dirname property="module.braille.basedir" file="${ant.file}"/>
+
+
+    <property name="module.jdk.home.braille" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.braille" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.braille" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.braille" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+
+    <property name="braille.output.dir" value="${module.braille.basedir}/out/production/Braille"/>
+    <property name="braille.testoutput.dir" value="${module.braille.basedir}/out/test/Braille"/>
+
+    <path id="braille.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="braille.module.production.classpath">
+        <path refid="${module.jdk.classpath.braille}"/>
+        <path refid="library.itextpdf-5.5.11.classpath"/>
+        <path refid="library.json-20160810.classpath"/>
+        <path refid="library.json-20160810-javadoc.classpath"/>
+    </path>
+
+    <path id="braille.runtime.production.module.classpath">
+        <pathelement location="${braille.output.dir}"/>
+        <path refid="library.itextpdf-5.5.11.classpath"/>
+        <path refid="library.json-20160810.classpath"/>
+        <path refid="library.json-20160810-javadoc.classpath"/>
+    </path>
+
+    <path id="braille.module.classpath">
+        <path refid="${module.jdk.classpath.braille}"/>
+        <pathelement location="${braille.output.dir}"/>
+        <path refid="library.itextpdf-5.5.11.classpath"/>
+        <path refid="library.json-20160810.classpath"/>
+        <path refid="library.json-20160810-javadoc.classpath"/>
+    </path>
+
+    <path id="braille.runtime.module.classpath">
+        <pathelement location="${braille.testoutput.dir}"/>
+        <pathelement location="${braille.output.dir}"/>
+        <path refid="library.itextpdf-5.5.11.classpath"/>
+        <path refid="library.json-20160810.classpath"/>
+        <path refid="library.json-20160810-javadoc.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.braille">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.braille">
+        <patternset refid="excluded.from.module.braille"/>
+    </patternset>
+
+    <path id="braille.module.sourcepath">
+        <dirset dir="${module.braille.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.braille" depends="compile.module.braille.production,compile.module.braille.tests"
+            description="Compile module Braille"/>
+
+    <target name="compile.module.braille.production" depends="register.custom.compilers"
+            description="Compile module Braille; production classes">
+        <mkdir dir="${braille.output.dir}"/>
+        <javac2 destdir="${braille.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.braille}/javac">
+            <compilerarg line="${compiler.args.braille}"/>
+            <bootclasspath refid="braille.module.bootclasspath"/>
+            <classpath refid="braille.module.production.classpath"/>
+            <src refid="braille.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.braille"/>
+        </javac2>
+
+        <copy todir="${braille.output.dir}">
+            <fileset dir="${module.braille.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.braille.tests" depends="register.custom.compilers,compile.module.braille.production"
+            description="compile module Braille; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.braille" description="cleanup module">
+        <delete dir="${braille.output.dir}"/>
+        <delete dir="${braille.testoutput.dir}"/>
+    </target>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean" depends="clean.module.braille" description="cleanup all"/>
+
+    <target name="build.modules" depends="init, clean, compile.module.braille" description="build all modules"/>
+
+    <target name="init.artifacts">
+        <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+        <property name="artifact.output.braille:jar" value="${basedir}/out/artifacts/Braille_jar"/>
+        <mkdir dir="${artifacts.temp.dir}"/>
+        <property name="temp.jar.path.Braille.jar" value="${artifacts.temp.dir}/Braille.jar"/>
+    </target>
+
+    <target name="artifact.braille:jar" depends="init.artifacts, compile.module.braille"
+            description="Build &#39;Braille:jar&#39; artifact">
+        <property name="artifact.temp.output.braille:jar" value="${artifacts.temp.dir}/Braille_jar"/>
+        <mkdir dir="${artifact.temp.output.braille:jar}"/>
+        <jar destfile="${temp.jar.path.Braille.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+            <zipfileset dir="${braille.output.dir}"/>
+        </jar>
+        <copy file="${temp.jar.path.Braille.jar}" tofile="${artifact.temp.output.braille:jar}/Braille.jar"/>
+    </target>
+
+    <target name="build.all.artifacts" depends="artifact.braille:jar" description="Build all artifacts">
+        <mkdir dir="${artifact.output.braille:jar}"/>
+        <copy todir="${artifact.output.braille:jar}">
+            <fileset dir="${artifact.temp.output.braille:jar}"/>
+        </copy>
+
+        <!-- Delete temporary files -->
+        <delete dir="${artifacts.temp.dir}"/>
+    </target>
+
+    <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

@@ -1,0 +1,5 @@
+1|Mount Etna, which is in news, is located in which country?|italy
+2|Who is the founder of space X|Elon Musk
+3|ISRO stands for ? |indian space research organisation
+4|Who is the current Prime minister of India| narendra modi
+5|How many Square does a chess game have? | 64
