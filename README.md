@@ -1,22 +1,60 @@
+# Eyeducate
+> Represented Mumbai University, UG category, at Avishkar Research Convention 2019 (Maharashtra State Inter-University Research Convention) securing 1st place :trophy: and Anveshan-Student Research Convention 2019 (West Zone)
 
-# Libraries Used
+___
+
+### Libraries Used
 *  [itextpdf-5.5.11](https://itextpdf.com/en/how-buy/agpl-license) ([AGPL License](https://itextpdf.com/en/how-buy/agpl-license))
 *  [jaunt-1.6.0](https://jaunt-api.com/index.htm) ([Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0))
 *  [jSerialComm-2.3.0](https://github.com/Fazecast/jSerialComm) ([Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0))
 *  [json-20160810](https://mvnrepository.com/artifact/org.json/json) ([The JSON License](https://www.json.org/license.html))
 
-### [wit](https://wit.ai/) is used for speech to text.
+> ### [wit](https://wit.ai/) is used for speech to text.
+  
+  
+  
+  
+___
+  
+  
+  
 
+### Snapshots
+
+#### Pdf to Braille
+![Pdf to braille](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/pdf%20to%20braille_Medium.gif)
+
+### Wikipedia Mode
+
+![Wikipedia](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/wikipedia_Medium.gif)
+
+### Dictionary Mode
+
+![Dictionary](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/dictionary_Medium.gif)
+
+### Text to Braille
+
+![Text To Braille](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/Text%20to%20braille_Medium.gif)
+
+### News Mode
+
+![News](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/News_Medium.gif)
+
+### Learning Mode
+
+![Learning mode](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/learning_mode.jpg)
+
+### OCR Mode
+
+![OCR mode](https://github.com/llGOKUll/Eyeducate-Braile-Desktop-App/blob/master/images/ocr_mode.png)
 
 ___
 
-
-
 # Abstract
-
+##### Date :- December, 2018
 
 ## Title :- BRAILLE  INTERFACE  APPLICATION  FOR THE BLIND.
-
+ 
 
 ### Introduction
 
@@ -29,7 +67,7 @@ The app responds to every action the user performs, with help of talkback.
 ### Eyeducate currently supports 7 modes 
 * Pdf to braille
 * Text to braille    
-*	Learning mode   
+* Learning mode   
 * Wikipedia mode
 * News mode
 * Dictionary and Spell check    
@@ -55,3 +93,17 @@ Every feature provides Voice I/O as well as display the content on the Eyedev.
 * http://www.afb.org/info/living-with-vision-loss/braille/what-is-braille/123
 * https://www.indiatoday.in/
 * https://www.wikipedia.org/
+
+
+___
+
+
+#### By Team Eyeducate,
+* Sanath D'souza
+* Kanad Gaikwad
+* Mandeep Choutapelly
+* Yash Lokhande
+
+___
+
+## Thank You :blush:
